@@ -9,6 +9,8 @@
 
 using namespace parallel_sorter;
 
+std::ofstream out("test_res.txt");
+
 std::vector<int> gen_data(long elem_num) {
     std::vector<int> vec(elem_num);
 
@@ -33,7 +35,7 @@ bool param_test(long thr_num, long elem_num, std::ostream& os) {
     parallel_sorter::merge_sort(vec, thr_num);
     double tm = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start).count();
     
-    os << "PARRALEL SORT = " << tm << " us" << std::endl << std::endl;
+    os << "PARRALEL SORT = " << tm << " us" << std::endl;
 
 
     start = std::chrono::high_resolution_clock::now();
@@ -53,51 +55,51 @@ bool param_test(long thr_num, long elem_num, std::ostream& os) {
 }
 
 TEST(threads_2, elems_100_000) {
-    ASSERT_TRUE(param_test(2, 100'000, std::cout));
+    ASSERT_TRUE(param_test(2, 100'000, out));
 }
 
 TEST(threads_4, elems_100_000) {
-    ASSERT_TRUE(param_test(4, 100'000, std::cout));
+    ASSERT_TRUE(param_test(4, 100'000, out));
 }
 
 TEST(threads_8, elems_100_000) {
-    ASSERT_TRUE(param_test(8, 100'000, std::cout));
+    ASSERT_TRUE(param_test(8, 100'000, out));
 }
 
 TEST(threads_16, elems_100_000) {
-    ASSERT_TRUE(param_test(16, 100'000, std::cout));
+    ASSERT_TRUE(param_test(16, 100'000, out));
 }
 
 TEST(threads_32, elems_100_000) {
-    ASSERT_TRUE(param_test(32, 100'000, std::cout));
+    ASSERT_TRUE(param_test(32, 100'000, out));
 }
 
 TEST(threads_64, elems_100_000) {
-    ASSERT_TRUE(param_test(64, 100'000, std::cout));
+    ASSERT_TRUE(param_test(64, 100'000, out));
 }
 
 TEST(threads_2, elems_500_000) {
-    ASSERT_TRUE(param_test(2, 500'000, std::cout));
+    ASSERT_TRUE(param_test(2, 500'000, out));
 }
 
 TEST(threads_4, elems_500_000) {
-    ASSERT_TRUE(param_test(4, 500'000, std::cout));
+    ASSERT_TRUE(param_test(4, 500'000, out));
 }
 
 TEST(threads_8, elems_500_000) {
-    ASSERT_TRUE(param_test(8, 500'000, std::cout));
+    ASSERT_TRUE(param_test(8, 500'000, out));
 }
 
 TEST(threads_16, elems_500_000) {
-    ASSERT_TRUE(param_test(16, 500'000, std::cout));
+    ASSERT_TRUE(param_test(16, 500'000, out));
 }
 
 TEST(threads_32, elems_500_000) {
-    ASSERT_TRUE(param_test(32, 500'000, std::cout));
+    ASSERT_TRUE(param_test(32, 500'000, out));
 }
 
 TEST(threads_64, elems_500_000) {
-    ASSERT_TRUE(param_test(64, 500'000, std::cout));
+    ASSERT_TRUE(param_test(64, 500'000, out));
 }
 
 
