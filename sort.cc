@@ -5,7 +5,7 @@
 
 constexpr int ELEM_NUM = 100'000;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) try {
     std::vector<int> vec(ELEM_NUM);
 
     std::random_device rd; 
@@ -54,4 +54,6 @@ int main(int argc, char* argv[]) {
     if (!flag) std::cout << "BAD SORT" << std::endl;
 
     return EXIT_SUCCESS;
+} catch (const std::exception& exc) {
+    std::cerr << "Something wrong: " << exc.what() << std::endl;
 }

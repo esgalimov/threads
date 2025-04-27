@@ -8,6 +8,7 @@
 #include <cmath>
 #include <fstream>
 #include <string>
+#include <stdexcept>
 
 namespace parallel_sorter {
 
@@ -98,6 +99,9 @@ void merge(vec_it_t head1, vec_it_t tail1, vec_it_t head2, vec_it_t tail2, vec_i
 }
 
 int merge_sort(std::vector<int>& vec, int thr_num) {
+    if ((thr_num == 0) || (thr_num & (thr_num - 1))) 
+        throw std::runtime_error("thr_num must be power of 2");
+
     std::vector<int> dest(vec.size());
 
     std::vector<pthread_t> thr(thr_num);
