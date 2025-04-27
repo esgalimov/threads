@@ -16,7 +16,13 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
+find_package(GTest REQUIRED)
+enable_testing()
+
 add_executable(sort ${CMAKE_CURRENT_SOURCE_DIR}/sort.cc)
+
+add_executable(sort_test ${CMAKE_CURRENT_SOURCE_DIR}/sort_test.cc)
+target_link_libraries(sort_test PRIVATE ${GTEST_LIBRARIES})
 
 
 target_include_directories(sort PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
