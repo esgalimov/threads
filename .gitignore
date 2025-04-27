@@ -1,2 +1,4 @@
 .vscode
 build
+configure-os-linux.sh
+conf-os.sh
