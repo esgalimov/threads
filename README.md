@@ -1,6 +1,8 @@
 # My parallel merge sort (pthread lib)
 Yes, it is better to use C++ API to deal with threads, but using pthread is my university task :)
 
+My merge sort is different from classical: I use std::sort (which is an Introsort (a combination of QuickSort, Heapsort, and Insertion Sort)) on each thread and then parallel merge these sorted vectors.
+
 ## System and CPU
 ```
 System:
@@ -31,3 +33,13 @@ fixed CPU frequency 3000 MHz
 ![image](https://github.com/user-attachments/assets/30638f66-0752-476c-97e7-1dc13115749f)
 
 We can see that on my config there is almost no effect when using more than 8 threads.
+
+## How to run
+From project source dir:
+```
+cmake -B build
+cd build
+make
+./sort_test
+```
+Then you can run *results.py* to see graphics.
