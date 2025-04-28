@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) try {
 
     auto start = std::chrono::high_resolution_clock::now();
 
-    parallel_sorter::merge_sort(vec, 8);
+    parallel_sorter::merge_sort(vec, 32);
 
     double tm = std::chrono::duration_cast<std::chrono::microseconds>(
             std::chrono::high_resolution_clock::now() - start).count();

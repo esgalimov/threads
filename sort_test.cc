@@ -11,8 +11,8 @@ using namespace parallel_sorter;
 
 std::ofstream out("test_res.txt");
 
-constexpr int WARMUP_ITERS = 10;
-constexpr int TEST_ITERS   = 20;
+constexpr int WARMUP_ITERS = 5;
+constexpr int TEST_ITERS   = 10;
 
 std::vector<int> gen_data(long elem_num) {
     std::vector<int> vec(elem_num);

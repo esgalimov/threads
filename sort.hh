@@ -35,7 +35,7 @@ void* thread_sort(void* arg) {
 
     int thr_vec_size = std::distance(data->vec->begin(), data->vec->end()) / data->thr_num;
 
-    #ifdef dDEBUG
+    #ifdef DEBUG
         std::string filename = "filename" + std::to_string(data->tid) + ".txt";
         std::ofstream in(filename);
     #endif
@@ -57,11 +57,11 @@ void* thread_sort(void* arg) {
             auto end = data->tid != data->thr_num - 1 ? begin + thr_vec_size * std::pow(2, i - 1) : data->vec->end();
 
             auto begin2 = end;
-            auto end2 = (data->tid + i) != data->thr_num - 1 && i < merge_cnt ? begin2 + thr_vec_size * std::pow(2, i - 1) : data->vec->end();
+            auto end2 = data->tid != data->thr_num - each && i < merge_cnt ? begin2 + thr_vec_size * std::pow(2, i - 1) : data->vec->end();
 
             auto dest_begin = data->dest->begin() + thr_vec_size * data->tid;
 
-            #ifdef dDEBUG
+            #ifdef DEBUG
                 in << "BEGIN  "  << " " << std::distance(data->vec->begin(), begin)  << std::endl;
                 in << "END    "  << " " <<  std::distance(data->vec->begin(), end)    << std::endl;
                 in << "BEGIN2 "  << " " <<  std::distance(data->vec->begin(), begin2) << std::endl;
@@ -74,7 +74,7 @@ void* thread_sort(void* arg) {
 
         pthread_barrier_wait(&barrier);
         if (data->tid == 0) { 
-            #ifdef dDEBUG
+            #ifdef DEBUG
                 std::cout << "STEP " << i << std::endl;
                 for (auto it = data->dest->begin(); it != data->dest->end(); ++it) {
                     std::cout << *it << " ";
@@ -101,6 +101,8 @@ void merge(vec_it_t head1, vec_it_t tail1, vec_it_t head2, vec_it_t tail2, vec_i
 int merge_sort(std::vector<int>& vec, int thr_num) {
     if ((thr_num == 0) || (thr_num & (thr_num - 1))) 
         throw std::runtime_error("thr_num must be power of 2");
+    if (vec.size() < thr_num)
+        throw std::runtime_error("thr_num lower than vectoe size");
 
     std::vector<int> dest(vec.size());
 
@@ -132,7 +134,7 @@ int merge_sort(std::vector<int>& vec, int thr_num) {
 
     pthread_barrier_destroy(&parallel_sorter::barrier);
 
-    #ifdef dDEBUG
+    #ifdef DEBUG
         for (auto& elem : vec) std::cout << elem << " ";
         std::cout << std::endl;
     #endif
